@@ -1,0 +1,25 @@
+Windows Registry Editor Version 5.00
+
+; ── PDF → JPG ──────────────────────────────────────────────────────────────
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.pdf\shell\ConvertToJPG]
+@="Convert to JPG"
+"Icon"="shell32.dll,47"
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.pdf\shell\ConvertToJPG\command]
+@="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\pdf_to_jpg.py\" \"%1\""
+
+; ── JPG → PDF ──────────────────────────────────────────────────────────────
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.jpg\shell\ConvertToPDF]
+@="Convert to PDF"
+"Icon"="shell32.dll,1"
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.jpg\shell\ConvertToPDF\command]
+@="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\jpg_to_pdf.py\" \"%1\""
+
+; ── JPEG → PDF ─────────────────────────────────────────────────────────────
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.jpeg\shell\ConvertToPDF]
+@="Convert to PDF"
+"Icon"="shell32.dll,1"
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.jpeg\shell\ConvertToPDF\command]
+@="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\jpg_to_pdf.py\" \"%1\""

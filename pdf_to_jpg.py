@@ -1,0 +1,112 @@
+import sys, os, time, tempfile, uuid, glob
+import fitz
+import tkinter as tk
+from tkinter import ttk
+
+QUEUE_DIR = os.path.join(tempfile.gettempdir(), "cc_pdf2jpg")
+LOCK_FILE  = os.path.join(tempfile.gettempdir(), "cc_pdf2jpg.lock")
+
+def enqueue(path):
+    os.makedirs(QUEUE_DIR, exist_ok=True)
+    job = os.path.join(QUEUE_DIR, f"{uuid.uuid4().hex}.job")
+    with open(job, "w") as f:
+        f.write(path)
+
+def try_become_master():
+    # Clean up stale lock (crash > 60s ago)
+    try:
+        if time.time() - os.path.getmtime(LOCK_FILE) > 60:
+            os.remove(LOCK_FILE)
+    except FileNotFoundError:
+        pass
+    try:
+        fd = os.open(LOCK_FILE, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+        os.write(fd, str(os.getpid()).encode())
+        os.close(fd)
+        return True
+    except FileExistsError:
+        return False
+
+def collect_jobs():
+    files = []
+    for jf in glob.glob(os.path.join(QUEUE_DIR, "*.job")):
+        try:
+            with open(jf) as f:
+                p = f.read().strip()
+            os.remove(jf)
+            if p:
+                files.append(p)
+        except Exception:
+            pass
+    return files
+
+def convert_pdf(pdf_path):
+    base = os.path.splitext(pdf_path)[0]
+    doc = fitz.open(pdf_path)
+    for i, page in enumerate(doc):
+        pix = page.get_pixmap(matrix=fitz.Matrix(2, 2))
+        out = f"{base}.jpg" if len(doc) == 1 else f"{base}_page{i+1}.jpg"
+        pix.save(out)
+    doc.close()
+
+def run_gui(files):
+    root = tk.Tk()
+    root.title("PDF → JPG")
+    root.geometry("400x110")
+    root.resizable(False, False)
+    root.attributes("-topmost", True)
+
+    label = tk.Label(root, text="Starting...", font=("Segoe UI", 10), anchor="w")
+    label.pack(fill="x", padx=20, pady=(15, 4))
+
+    bar = ttk.Progressbar(root, length=360, mode="determinate", maximum=len(files))
+    bar.pack(padx=20)
+
+    errors = []
+
+    def work():
+        for i, path in enumerate(files):
+            label.config(text=f"({i+1}/{len(files)})  {os.path.basename(path)}")
+            root.update()
+            try:
+                convert_pdf(path)
+            except Exception as e:
+                errors.append(f"{os.path.basename(path)}: {e}")
+            bar["value"] = i + 1
+            root.update()
+
+        if errors:
+            label.config(text=f"Done with {len(errors)} error(s). Check filenames.")
+            root.after(4000, root.destroy)
+        else:
+            label.config(text=f"Done — {len(files)} file(s) converted.")
+            root.after(1500, root.destroy)
+
+    root.after(50, work)
+    root.mainloop()
+
+def main():
+    if len(sys.argv) < 2:
+        sys.exit(1)
+
+    enqueue(os.path.abspath(sys.argv[1]))
+
+    if not try_become_master():
+        return  # Another instance is already running the GUI
+
+    time.sleep(0.8)   # Wait for sibling processes to enqueue their files
+
+    files = collect_jobs()
+    if not files:
+        files = [os.path.abspath(sys.argv[1])]
+
+    try:
+        run_gui(files)
+    finally:
+        try:
+            os.remove(LOCK_FILE)
+        except Exception:
+            pass
+
+if __name__ == "__main__":
+    main()
