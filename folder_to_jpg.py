@@ -20,10 +20,12 @@ def convert_pdf(path):
         out = f"{base}.jpg" if len(doc) == 1 else f"{base}_page{i+1}.jpg"
         pix.save(out)
     doc.close()
+    os.remove(path)
 
 def convert_image(path):
     out = os.path.splitext(path)[0] + ".jpg"
     Image.open(path).convert("RGB").save(out)
+    os.remove(path)
 
 def run_gui(pdfs, imgs):
     total = len(pdfs) + len(imgs)
