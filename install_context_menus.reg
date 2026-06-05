@@ -56,6 +56,22 @@ Windows Registry Editor Version 5.00
 [HKEY_CLASSES_ROOT\Directory\Background\shell\CropPassports\command]
 @="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\crop_passport.py\" \"%V\""
 
+; ── Folder right-click: Passport Master (convert all + crop) ─────────────────
+[HKEY_CLASSES_ROOT\Directory\shell\PassportMaster]
+@="Passport Master — Convert & Crop All"
+"Icon"="shell32.dll,23"
+
+[HKEY_CLASSES_ROOT\Directory\shell\PassportMaster\command]
+@="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\passport_master.py\" \"%1\""
+
+; ── Inside-folder right-click: Passport Master ───────────────────────────────
+[HKEY_CLASSES_ROOT\Directory\Background\shell\PassportMaster]
+@="Passport Master — Convert & Crop All"
+"Icon"="shell32.dll,23"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\PassportMaster\command]
+@="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\passport_master.py\" \"%V\""
+
 ; ── Single image right-click: Crop Passport to Details ───────────────────────
 [HKEY_CLASSES_ROOT\SystemFileAssociations\.jpg\shell\CropPassport]
 @="Crop Passport to Details"

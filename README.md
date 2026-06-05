@@ -10,6 +10,7 @@ Python scripts to convert between PDF and JPG, batch-convert entire folders, and
 | `jpg_to_pdf.py` | Converts a JPG image to a PDF file |
 | `folder_to_jpg.py` | Converts all PDFs and images (PNG, BMP, JPEG) in a folder and its subfolders to JPG |
 | `crop_passport.py` | Detects the passport data page in an image and crops it out (perspective-corrected); scans subfolders when given a folder |
+| `passport_master.py` | Master script — runs all three steps in order: PDF→JPG, images→JPG, then crop all passport details |
 
 Output files are saved in the same folder as the input file.
 
@@ -37,6 +38,8 @@ pip install pymupdf pillow opencv-python
 | A folder | **Crop Passports to Details** |
 | Inside a folder (on empty space) | **Convert All to JPG** |
 | Inside a folder (on empty space) | **Crop Passports to Details** |
+| A folder | **Passport Master — Convert & Crop All** |
+| Inside a folder (on empty space) | **Passport Master — Convert & Crop All** |
 
 A progress window appears and closes automatically when done.
 
