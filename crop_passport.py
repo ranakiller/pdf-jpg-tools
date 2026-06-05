@@ -90,7 +90,7 @@ def collect_images(target):
     files = []
     for ext in ["*.jpg", "*.jpeg", "*.png", "*.bmp",
                 "*.JPG", "*.JPEG", "*.PNG", "*.BMP"]:
-        files.extend(glob.glob(os.path.join(target, ext)))
+        files.extend(glob.glob(os.path.join(target, "**", ext), recursive=True))
     return [f for f in files if "_cropped" not in os.path.basename(f)]
 
 
