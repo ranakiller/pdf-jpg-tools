@@ -9,7 +9,7 @@ Python scripts to convert between PDF and JPG, batch-convert entire folders, and
 | `pdf_to_jpg.py` | Converts each page of a PDF to a JPG image |
 | `jpg_to_pdf.py` | Converts a JPG image to a PDF file |
 | `folder_to_jpg.py` | Converts all PDFs and images (PNG, BMP, JPEG) in a folder and its subfolders to JPG |
-| `crop_passport.py` | Detects the passport data page in an image and crops it out (perspective-corrected) |
+| `crop_passport.py` | Detects the passport data page in an image and crops it out (perspective-corrected); scans subfolders when given a folder |
 
 Output files are saved in the same folder as the input file.
 
@@ -54,7 +54,7 @@ python crop_passport.py "path\to\folder"
 
 - **Batch selection**: selecting multiple files at once and right-clicking will process them all in a single progress window.
 - **Folder conversion**: `folder_to_jpg.py` scans all subfolders recursively.
-- **Passport cropping**: uses edge detection to find the passport rectangle and applies a perspective correction to straighten tilted photos. Output is saved as `filename_cropped.jpg`. Already-cropped files are skipped automatically.
+- **Passport cropping**: uses edge detection to find the passport rectangle and applies a perspective correction to straighten tilted photos. Output is saved as `filename_cropped.jpg`. Already-cropped files are skipped automatically. Scans all subfolders recursively when given a folder.
 - **Context menu not visible?** On Windows 11, right-click and choose **Show more options** — the entries appear there. To make them show in the main menu, run this in PowerShell (once):
   ```
   reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
