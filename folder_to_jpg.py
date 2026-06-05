@@ -7,9 +7,9 @@ from tkinter import ttk, messagebox
 def get_files(folder):
     pdfs, imgs = [], []
     for ext in ["*.pdf", "*.PDF"]:
-        pdfs.extend(glob.glob(os.path.join(folder, ext)))
+        pdfs.extend(glob.glob(os.path.join(folder, "**", ext), recursive=True))
     for ext in ["*.png", "*.PNG", "*.bmp", "*.BMP", "*.jpeg", "*.JPEG"]:
-        imgs.extend(glob.glob(os.path.join(folder, ext)))
+        imgs.extend(glob.glob(os.path.join(folder, "**", ext), recursive=True))
     return pdfs, imgs
 
 def convert_pdf(path):
