@@ -1,6 +1,6 @@
 Windows Registry Editor Version 5.00
 
-; ── PDF → JPG ──────────────────────────────────────────────────────────────
+; ── PDF → JPG (single file) ──────────────────────────────────────────────────
 [HKEY_CLASSES_ROOT\SystemFileAssociations\.pdf\shell\ConvertToJPG]
 @="Convert to JPG"
 "Icon"="shell32.dll,47"
@@ -8,7 +8,7 @@ Windows Registry Editor Version 5.00
 [HKEY_CLASSES_ROOT\SystemFileAssociations\.pdf\shell\ConvertToJPG\command]
 @="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\pdf_to_jpg.py\" \"%1\""
 
-; ── JPG → PDF ──────────────────────────────────────────────────────────────
+; ── JPG → PDF (single file) ──────────────────────────────────────────────────
 [HKEY_CLASSES_ROOT\SystemFileAssociations\.jpg\shell\ConvertToPDF]
 @="Convert to PDF"
 "Icon"="shell32.dll,1"
@@ -16,10 +16,71 @@ Windows Registry Editor Version 5.00
 [HKEY_CLASSES_ROOT\SystemFileAssociations\.jpg\shell\ConvertToPDF\command]
 @="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\jpg_to_pdf.py\" \"%1\""
 
-; ── JPEG → PDF ─────────────────────────────────────────────────────────────
+; ── JPEG → PDF (single file) ─────────────────────────────────────────────────
 [HKEY_CLASSES_ROOT\SystemFileAssociations\.jpeg\shell\ConvertToPDF]
 @="Convert to PDF"
 "Icon"="shell32.dll,1"
 
 [HKEY_CLASSES_ROOT\SystemFileAssociations\.jpeg\shell\ConvertToPDF\command]
 @="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\jpg_to_pdf.py\" \"%1\""
+
+; ── Folder right-click: Convert All to JPG ───────────────────────────────────
+[HKEY_CLASSES_ROOT\Directory\shell\ConvertAllToJPG]
+@="Convert All to JPG"
+"Icon"="shell32.dll,47"
+
+[HKEY_CLASSES_ROOT\Directory\shell\ConvertAllToJPG\command]
+@="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\folder_to_jpg.py\" \"%1\""
+
+; ── Inside-folder right-click: Convert All to JPG ────────────────────────────
+[HKEY_CLASSES_ROOT\Directory\Background\shell\ConvertAllToJPG]
+@="Convert All to JPG"
+"Icon"="shell32.dll,47"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\ConvertAllToJPG\command]
+@="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\folder_to_jpg.py\" \"%V\""
+
+; ── Folder right-click: Crop Passports to Details ────────────────────────────
+[HKEY_CLASSES_ROOT\Directory\shell\CropPassports]
+@="Crop Passports to Details"
+"Icon"="shell32.dll,167"
+
+[HKEY_CLASSES_ROOT\Directory\shell\CropPassports\command]
+@="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\crop_passport.py\" \"%1\""
+
+; ── Inside-folder right-click: Crop Passports to Details ─────────────────────
+[HKEY_CLASSES_ROOT\Directory\Background\shell\CropPassports]
+@="Crop Passports to Details"
+"Icon"="shell32.dll,167"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\CropPassports\command]
+@="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\crop_passport.py\" \"%V\""
+
+; ── Single image right-click: Crop Passport to Details ───────────────────────
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.jpg\shell\CropPassport]
+@="Crop Passport to Details"
+"Icon"="shell32.dll,167"
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.jpg\shell\CropPassport\command]
+@="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\crop_passport.py\" \"%1\""
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.jpeg\shell\CropPassport]
+@="Crop Passport to Details"
+"Icon"="shell32.dll,167"
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.jpeg\shell\CropPassport\command]
+@="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\crop_passport.py\" \"%1\""
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.png\shell\CropPassport]
+@="Crop Passport to Details"
+"Icon"="shell32.dll,167"
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.png\shell\CropPassport\command]
+@="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\crop_passport.py\" \"%1\""
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.bmp\shell\CropPassport]
+@="Crop Passport to Details"
+"Icon"="shell32.dll,167"
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.bmp\shell\CropPassport\command]
+@="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\crop_passport.py\" \"%1\""
