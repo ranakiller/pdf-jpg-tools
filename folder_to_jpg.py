@@ -4,6 +4,15 @@ from PIL import Image
 import tkinter as tk
 from tkinter import ttk, messagebox
 
+def unique_path(path):
+    if not os.path.exists(path):
+        return path
+    base, ext = os.path.splitext(path)
+    i = 1
+    while os.path.exists(f"{base}_{i}{ext}"):
+        i += 1
+    return f"{base}_{i}{ext}"
+
 def get_files(folder):
     pdfs, imgs = [], []
     for ext in ["*.pdf", "*.PDF"]:
@@ -17,13 +26,13 @@ def convert_pdf(path):
     doc = fitz.open(path)
     for i, page in enumerate(doc):
         pix = page.get_pixmap(matrix=fitz.Matrix(2, 2))
-        out = f"{base}.jpg" if len(doc) == 1 else f"{base}_page{i+1}.jpg"
+        out = unique_path(f"{base}.jpg" if len(doc) == 1 else f"{base}_page{i+1}.jpg")
         pix.save(out)
     doc.close()
     os.remove(path)
 
 def convert_image(path):
-    out = os.path.splitext(path)[0] + ".jpg"
+    out = unique_path(os.path.splitext(path)[0] + ".jpg")
     Image.open(path).convert("RGB").save(out)
     os.remove(path)
 

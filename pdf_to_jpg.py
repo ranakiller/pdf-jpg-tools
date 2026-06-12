@@ -40,12 +40,21 @@ def collect_jobs():
             pass
     return files
 
+def unique_path(path):
+    if not os.path.exists(path):
+        return path
+    base, ext = os.path.splitext(path)
+    i = 1
+    while os.path.exists(f"{base}_{i}{ext}"):
+        i += 1
+    return f"{base}_{i}{ext}"
+
 def convert_pdf(pdf_path):
     base = os.path.splitext(pdf_path)[0]
     doc = fitz.open(pdf_path)
     for i, page in enumerate(doc):
         pix = page.get_pixmap(matrix=fitz.Matrix(2, 2))
-        out = f"{base}.jpg" if len(doc) == 1 else f"{base}_page{i+1}.jpg"
+        out = unique_path(f"{base}.jpg" if len(doc) == 1 else f"{base}_page{i+1}.jpg")
         pix.save(out)
     doc.close()
 

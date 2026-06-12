@@ -39,8 +39,17 @@ def collect_jobs():
             pass
     return files
 
+def unique_path(path):
+    if not os.path.exists(path):
+        return path
+    base, ext = os.path.splitext(path)
+    i = 1
+    while os.path.exists(f"{base}_{i}{ext}"):
+        i += 1
+    return f"{base}_{i}{ext}"
+
 def convert_jpg(jpg_path):
-    out = os.path.splitext(jpg_path)[0] + ".pdf"
+    out = unique_path(os.path.splitext(jpg_path)[0] + ".pdf")
     img = Image.open(jpg_path).convert("RGB")
     img.save(out)
 
