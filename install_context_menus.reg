@@ -39,3 +39,55 @@ Windows Registry Editor Version 5.00
 
 [HKEY_CLASSES_ROOT\Directory\Background\shell\ConvertAllToJPG\command]
 @="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\folder_to_jpg.py\" \"%V\""
+
+; ── Folder right-click: Merge Images to PDF ──────────────────────────────────
+[HKEY_CLASSES_ROOT\Directory\shell\MergeImagesToPDF]
+@="Merge Images to PDF"
+"Icon"="shell32.dll,1"
+
+[HKEY_CLASSES_ROOT\Directory\shell\MergeImagesToPDF\command]
+@="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\folder_images_to_pdf.py\" \"%1\""
+
+; ── Inside-folder right-click: Merge Images to PDF ───────────────────────────
+[HKEY_CLASSES_ROOT\Directory\Background\shell\MergeImagesToPDF]
+@="Merge Images to PDF"
+"Icon"="shell32.dll,1"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\MergeImagesToPDF\command]
+@="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\folder_images_to_pdf.py\" \"%V\""
+
+; ── Merge to PDF (multi-select: jpg / jpeg / png / bmp / pdf) ────────────────
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.jpg\shell\MergeToPDF]
+@="Merge to PDF"
+"Icon"="shell32.dll,1"
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.jpg\shell\MergeToPDF\command]
+@="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\merge_to_pdf.py\" \"%1\""
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.jpeg\shell\MergeToPDF]
+@="Merge to PDF"
+"Icon"="shell32.dll,1"
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.jpeg\shell\MergeToPDF\command]
+@="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\merge_to_pdf.py\" \"%1\""
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.png\shell\MergeToPDF]
+@="Merge to PDF"
+"Icon"="shell32.dll,1"
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.png\shell\MergeToPDF\command]
+@="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\merge_to_pdf.py\" \"%1\""
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.bmp\shell\MergeToPDF]
+@="Merge to PDF"
+"Icon"="shell32.dll,1"
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.bmp\shell\MergeToPDF\command]
+@="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\merge_to_pdf.py\" \"%1\""
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.pdf\shell\MergeToPDF]
+@="Merge to PDF"
+"Icon"="shell32.dll,1"
+
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.pdf\shell\MergeToPDF\command]
+@="\"C:\\Python314\\pythonw.exe\" \"C:\\Users\\MFurq\\Scripts\\merge_to_pdf.py\" \"%1\""
